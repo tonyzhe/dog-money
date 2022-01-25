@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter, {RouteConfig} from 'vue-router';
 import Money from '@/views/Money/Money.vue';
-import Chart from '@/views/Chart.vue';
+import Tags from '@/views/Money/AddTags/Tags.vue';
 
 Vue.use(VueRouter);
 
@@ -22,6 +22,12 @@ const routes: Array<RouteConfig> = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Bill/Bill.vue')
+  },
+  {
+    path: '/tags',
+    name: 'Tag',
+    component: () => import('../views/Money/AddTags/Tags.vue')
+
   },
   {
     path: '/chart',

@@ -1,7 +1,5 @@
 <template>
-  <div>
-    我是tags组件
-  </div>
+
 </template>
 
 <script lang="ts">
@@ -9,7 +7,7 @@ import Vue from 'vue';
 import {Component} from 'vue-property-decorator';
 
 @Component
-export default class Tags extends Vue {
+export default class Calculator extends Vue {
 
 }
 </script>

@@ -3,8 +3,13 @@
     <div></div>
     <div class="switches">
       <ul>
-        <li>支出</li>
-        <li>收入</li>
+        <li v-for="(item,index) in tabs" :key="index"
+            :class="{'selected':currentTab===item.value}"
+            @click="selectedTab(item.value)"
+        >{{
+            item.name
+          }}
+        </li>
       </ul>
     </div>
     <div class="cancel">
@@ -15,13 +20,20 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component} from 'vue-property-decorator';
+import {Component, Prop} from 'vue-property-decorator';
 import Icon from '@/components/Icon.vue';
+import {TabBar} from '@/custom';
 
 @Component({
   components: {Icon}
 })
 export default class Tabs extends Vue {
+  @Prop({required: true, type: String}) currentTab!: '-' | '+';
+  @Prop({required: true, type: Array}) tabs!: TabBar[];
+
+  selectedTab(tabValue: '-' | '+'): void {
+    this.$emit('update:currentTab', tabValue);
+  }
 
 }
 </script>
@@ -43,6 +55,11 @@ export default class Tabs extends Vue {
         font-size: 14px;
         color: pink;
         padding: 8px 15px;
+
+        &.selected {
+          color: #fff;
+          background-color: pink;
+        }
       }
     }
   }
