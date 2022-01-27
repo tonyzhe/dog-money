@@ -3,6 +3,12 @@ export interface TagItem {
   value: string;
 }
 
+export interface expendTagItem {
+  name: string;
+  value: string;
+  relatedTag: TagItem[];
+}
+
 export interface RecordItem {
   tag: TagItem;
   type: '-' | '+';
