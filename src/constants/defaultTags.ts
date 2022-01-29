@@ -62,6 +62,15 @@ const medicalTags = [
   {name: 'surgery', value: '手术费'}
 ];
 const defaultExpenseTags = [
+  {name: 'food', value: '餐饮'},
+  {name: 'shopping', value: '购物'},
+  {name: 'house', value: '居住'},
+  {name: 'transport', value: '交通'},
+  {name: 'entertainment', value: '娱乐'},
+  {name: 'medical', value: '医疗'}
+] as TagItem[];
+
+const expendTagsOfviewTags = [
   {name: 'food', value: '餐饮', relatedTag: foodTags},
   {name: 'shopping', value: '购物', relatedTag: shoppingTags},
   {name: 'house', value: '居住', relatedTag: houseTags},
@@ -71,4 +80,12 @@ const defaultExpenseTags = [
 ] as expendTagItem[];
 
 
-export {defaultExpenseTags, defaultIncomeTags, foodTags, houseTags, entertainmentTags, medicalTags};
+export {
+  defaultExpenseTags,
+  defaultIncomeTags,
+  foodTags,
+  houseTags,
+  entertainmentTags,
+  medicalTags,
+  expendTagsOfviewTags
+};

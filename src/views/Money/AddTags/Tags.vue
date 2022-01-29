@@ -44,17 +44,16 @@ import {Component} from 'vue-property-decorator';
 import Icon from '@/components/Icon.vue';
 import {expendTagItem, TagItem} from '@/custom';
 import TagList from '@/components/Money/TagList.vue';
+import {expendTagsOfviewTags} from '@/constants/defaultTags';
 
 @Component({
   components: {TagList, Icon}
 })
 export default class Tags extends Vue {
   initTag: TagItem = {name: 'food', value: '餐饮'};
+  tagList: expendTagItem[] = expendTagsOfviewTags;
 
 
-  get tagList(): expendTagItem[] {
-    return this.$store.state.tagList;
-  }
 }
 </script>
 
