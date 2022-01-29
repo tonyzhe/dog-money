@@ -69,6 +69,7 @@ export default class TagList extends Vue {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 
     &-icon {
       width: 48px;
