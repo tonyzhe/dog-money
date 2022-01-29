@@ -47,13 +47,7 @@ export default class Icon extends Vue {
   overflow: hidden;
 }
 
-//.tagsClass-icons {
-//  width: 1.8em;
-//  height: 1.8em;
-//  vertical-align: -0.15em;
-//  fill: currentColor;
-//  overflow: hidden;
-//}
+
 
 
 </style>

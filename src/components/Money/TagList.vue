@@ -55,7 +55,7 @@ export default class TagList extends Vue {
 
 <style lang="scss" scoped>
 .tags {
-  padding: 16px;
+  padding: 0 16px;
   display: flex;
   //flex-direction: row;
   flex-wrap: wrap;
@@ -71,8 +71,8 @@ export default class TagList extends Vue {
     align-items: center;
 
     &-icon {
-      width: 56px;
-      height: 56px;
+      width: 48px;
+      height: 48px;
       padding: 4px;
       border-radius: 50%;
       margin-bottom: 4px;
@@ -81,8 +81,8 @@ export default class TagList extends Vue {
       align-items: center;
 
       svg {
-        width: 44px;
-        height: 44px;
+        width: 34px;
+        height: 34px;
       }
 
       &.selected {

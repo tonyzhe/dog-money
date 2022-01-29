@@ -3,12 +3,12 @@
     <div class="fixed">
       <header class="header">
         <div class="title">
-          <button class="back">
+          <button class="back" @click="back">
             <Icon name="left"></Icon>
           </button>
           <span>添加支出类别</span>
         </div>
-        <button>
+        <button @click="ok">
           <icon name="done"></icon>
         </button>
       </header>
@@ -16,18 +16,18 @@
         <div class="label">
           <span>选中的标签:</span>
           <div class="selectedIcon">
-            <Icon :name="initTag.name"/>
+            <Icon :name="currentTag.name"/>
           </div>
         </div>
 
-        <span>{{ initTag.value }}</span>
+        <span>{{ currentTag.value }}</span>
       </div>
     </div>
     <div class="content">
       <div v-for="item in tagList" :key="item.value">
         <div class="kind-name">{{ item.value }}</div>
 
-        <tag-list :selected-tag.sync="initTag"
+        <tag-list :selected-tag.sync="currentTag"
                   :tag-list="item
                   .relatedTag"
                   icon-class="tagsClass"
@@ -45,14 +45,27 @@ import Icon from '@/components/Icon.vue';
 import {expendTagItem, TagItem} from '@/custom';
 import TagList from '@/components/Money/TagList.vue';
 import {expendTagsOfviewTags} from '@/constants/defaultTags';
+import clone from '@/lib/clone';
 
 @Component({
   components: {TagList, Icon}
 })
 export default class Tags extends Vue {
-  initTag: TagItem = {name: 'food', value: '餐饮'};
+  currentTag: TagItem = {name: 'food', value: '餐饮'};
   tagList: expendTagItem[] = expendTagsOfviewTags;
 
+  back(): void {
+    this.$router.replace('/money');
+  }
+
+  ok(): void {
+    this.$store.commit('insertTag', clone(this.currentTag));
+    if (this.$store.state.tagError === 'duplicate') {
+      window.alert('该标签已存在啦!');
+    } else {
+      this.$router.replace('/money');
+    }
+  }
 
 }
 </script>

@@ -6,9 +6,12 @@
               :tag-list="tagList"
               :selectedTag.sync="record.tag"
               :dynamic=true
+              icon-class="money"
     />
     <tag-list v-if="record.type==='+'"
-              :selected-tag.sync="record.tag" :tag-list="incomeTags"/>
+              :selected-tag.sync="record.tag" :tag-list="incomeTags"
+              icon-class="money"
+    />
   </layout>
 </template>
 
@@ -50,5 +53,11 @@ export default class Money extends Vue {
 </script>
 
 <style lang="scss" scoped>
-
+::v-deep .money-icons {
+  width: 1.5em;
+  height: 1.5em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
 </style>
