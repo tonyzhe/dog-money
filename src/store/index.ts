@@ -1,17 +1,20 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import {defaultExpenseTags} from '@/constants/defaultTags';
-import {TagItem} from '@/custom';
+import {RecordItem, TagItem} from '@/custom';
+import idCreator from '@/lib/idCreator';
 
 Vue.use(Vuex);
 type storeState = {
   tagList: TagItem[];
-  tagError: '' | 'duplicate'
+  tagError: '' | 'duplicate';
+  recordList: RecordItem[]
 }
 const store = new Vuex.Store({
   state: {
     tagList: JSON.parse(window.localStorage.getItem('tag-list') || '0') || defaultExpenseTags,
-    tagError: ''
+    tagError: '',
+    recordList: JSON.parse(window.localStorage.getItem('record-list') || '[]')
   } as storeState,
   mutations: {
     insertTag(state, tag: TagItem) {
@@ -27,7 +30,20 @@ const store = new Vuex.Store({
     },
     saveTag(state) {
       window.localStorage.setItem('tag-list', JSON.stringify(state.tagList));
-    }
+    },
+
+    insertRecord(state, record: RecordItem) {
+      record.id = idCreator();
+      record.createAt = new Date();
+      state.recordList.push(record);
+      store.commit('saveRecord');
+    },
+    saveRecord(state) {
+      window.localStorage.setItem('record-list', JSON.stringify(state.recordList));
+    },
+    fetchRecordList(state) {
+      return state.recordList;
+    },
   },
   actions: {},
   modules: {}

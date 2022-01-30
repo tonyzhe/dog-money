@@ -10,10 +10,12 @@ export interface expendTagItem {
 }
 
 export interface RecordItem {
+  id?: number;
   tag: TagItem;
   type: '-' | '+';
   note: string;
   amount: number;
+  createAt?: Date;
 
 }
 

@@ -5,12 +5,13 @@
     <label class="note">
       <icon name="note"></icon>
       <span>备注:</span>
-      <input type="text" placeholder="写点备注吧~" :value="note">
+      <input type="text" placeholder="写点备注吧~" :value="note" @input="writeNote($event.target.value)">
     </label>
     <div class="output">{{ output }}</div>
     <div class="numberPad clear-fix">
       <button v-for="(item,index) in buttonList" :key="index"
               :class="item==='完成'&& 'ok'"
+              @click="handle(item)"
       >{{ item }}
       </button>
       <button>
@@ -38,6 +39,15 @@ export default class Calculator extends Vue {
   buttonList: string[] = [
     '1', '2', '3', '+', '4', '5', '6', '-', '7', '8', '9', '完成', '.', '0'
   ];
+
+  writeNote(note: string): void {
+    this.$emit('update:note', note);
+  }
+  handle(name:string):void{
+    if(name==='完成'){
+      this.$emit('submit')
+    }
+  }
 }
 </script>
 

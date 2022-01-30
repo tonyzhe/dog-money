@@ -15,9 +15,13 @@
                 icon-class="money"
                 class-prefix="money"
       />
+      {{ recordList }}
     </div>
 
-    <Calculator :output.sync="record.amount" :note.sync="record.note" class-prefix="money"/>
+    <Calculator :output.sync="record.amount" :note.sync="record.note" class-prefix="money"
+                @submit="saveRecord"
+    />
+
   </layout>
 </template>
 
@@ -42,6 +46,10 @@ export default class Money extends Vue {
     return this.$store.state.tagList;
   }
 
+  get recordList(): RecordItem[] {
+    return this.$store.state.recordList;
+  }
+
   initRecord(): RecordItem {
     return {tag: {name: 'food', value: '餐饮'}, type: '-', note: '', amount: 0};
   }
@@ -53,6 +61,12 @@ export default class Money extends Vue {
     } else if (value === '-') {
       this.record.tag = {name: 'food', value: '餐饮'};
     }
+  }
+
+  saveRecord(): void {
+    this.$store.commit('insertRecord', this.record);
+    this.record = this.initRecord();
+    this.$router.replace('/bill');
   }
 
 
