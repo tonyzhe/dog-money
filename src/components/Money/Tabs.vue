@@ -4,7 +4,7 @@
     <div class="switches">
       <ul>
         <li v-for="(item,index) in tabs" :key="index"
-            :class="{'selected':currentTab===item.value}"
+            :class="{'selected': currentTab===item.value}"
             @click="selectedTab(item.value)"
         >{{
             item.name
@@ -12,7 +12,7 @@
         </li>
       </ul>
     </div>
-    <div class="cancel">
+    <div class="cancel" @click="cancel">
       <Icon name="cancel" class-prefix="tab"></Icon>
     </div>
   </div>
@@ -33,6 +33,10 @@ export default class Tabs extends Vue {
 
   selectedTab(tabValue: '-' | '+'): void {
     this.$emit('update:currentTab', tabValue);
+  }
+
+  cancel(): void {
+    this.$router.replace('/bill');
   }
 
 }

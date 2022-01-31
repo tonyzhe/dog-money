@@ -3,7 +3,7 @@ import {expendTagItem, TagItem} from '@/custom';
 
 const defaultIncomeTags = [
   {name: 'bonus', value: '奖金'},
-  {name: 'gift', value: '餐饮'},
+  {name: 'gift', value: '礼金'},
   {name: 'part-time', value: '兼职'},
   {name: 'reimbursement', value: '报销'},
   {name: 'salary', value: '工资'}

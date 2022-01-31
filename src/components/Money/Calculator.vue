@@ -62,19 +62,6 @@ export default class Calculator extends Vue {
     }
   }
 
-  complete(): void {
-    const last = this.output.slice(-1);
-    if ((this.output.indexOf('+') >= 0 || this.output.indexOf('-')) && '+-'.indexOf(last) < 0) {
-      this.calculate();
-      this.beforeNumber = this.handleError(this.beforeNumber);
-
-    } else {
-      this.beforeNumber = parseFloat(this.output);
-    }
-    this.$emit('update:amount', this.beforeNumber);
-    this.output = '0';
-    this.$emit('submit');
-  }
 
   //处理误差
   handleError(value: number): number {
@@ -216,6 +203,19 @@ export default class Calculator extends Vue {
       this.output = '0';
       this.reset();
     }
+  }
+
+  complete(): void {
+    const last = this.output.slice(-1);
+    if ((this.output.indexOf('+') >= 0 || this.output.indexOf('-') >= 0) && '+-'.indexOf(last) < 0) {
+      this.calculate();
+      this.beforeNumber = this.handleError(this.beforeNumber);
+    } else {
+      this.beforeNumber = parseFloat(this.output);
+    }
+    this.$emit('update:amount', this.beforeNumber);
+    this.output = '0';
+    this.$emit('submit');
   }
 
   @Watch('operator')
