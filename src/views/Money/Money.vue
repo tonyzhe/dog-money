@@ -15,10 +15,9 @@
                 icon-class="money"
                 class-prefix="money"
       />
-      {{ recordList }}
     </div>
 
-    <Calculator :output.sync="record.amount" :note.sync="record.note" class-prefix="money"
+    <Calculator :amount.sync="record.amount" :note.sync="record.note" class-prefix="money"
                 @submit="saveRecord"
     />
 
