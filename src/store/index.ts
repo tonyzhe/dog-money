@@ -9,12 +9,14 @@ type storeState = {
   tagList: TagItem[];
   tagError: '' | 'duplicate';
   recordList: RecordItem[]
+  currentRecord: RecordItem | undefined
 }
 const store = new Vuex.Store({
   state: {
     tagList: JSON.parse(window.localStorage.getItem('tag-list') || '0') || defaultExpenseTags,
     tagError: '',
-    recordList: JSON.parse(window.localStorage.getItem('record-list') || '[]')
+    recordList: JSON.parse(window.localStorage.getItem('record-list') || '[]'),
+    currentRecord: undefined
   } as storeState,
   mutations: {
     insertTag(state, tag: TagItem) {
@@ -43,6 +45,25 @@ const store = new Vuex.Store({
     },
     fetchRecordList(state) {
       return state.recordList;
+    },
+    findRecord(state, id: number) {
+      const record = state.recordList.filter(item => item.id === id)[0];
+      if (record) {
+        state.currentRecord = record;
+      }
+    },
+    updateRecord(state, payload: { id: number, record: RecordItem }) {
+      const {id, record} = payload;
+      // console.log(record);
+
+      for (let i = 0; i < state.recordList.length; i++) {
+
+        if (state.recordList[i].id === id) {
+          state.recordList[i] = record;
+          break;
+        }
+      }
+      store.commit('saveRecord');
     },
   },
   actions: {},

@@ -46,28 +46,34 @@
       <li v-for="item in groupList" :key="item.name" class="groupList">
         <h3 class="title">{{ getTitle(item) }} <span>{{ getTotal(item) }}</span></h3>
 
-        <ul class="items">
-          <li class="item" v-for="record in item.items " :key="record.id">
+        <div class="items">
+          <router-link v-for="record in item.items"
+                       :to="`/record/edit/${record.id}`"
+                       :key="record.id"
+                       class="item"
+          >
             <div class="icon">
               <icon :name="record.tag.name" class-prefix="bill"></icon>
               <span>{{ record.tag.value }}</span>
             </div>
             <span>{{ getAmount(record) }}</span>
-          </li>
-        </ul>
+          </router-link>
+        </div>
+
       </li>
     </ul>
     <div v-else class="blank">
       <blank></blank>
     </div>
     <div>
+
     </div>
   </layout>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component} from 'vue-property-decorator';
+import {Component, Watch} from 'vue-property-decorator';
 import Layout from '@/components/Layout.vue';
 import Nav from '@/components/Nav.vue';
 import dayjs from 'dayjs';
@@ -220,6 +226,16 @@ export default class Bill extends Vue {
       '星期六'
     ][value];
 
+  }
+
+  @Watch('year')
+  saveYear(year: string): void {
+    window.sessionStorage.setItem('year', year);
+  }
+
+  @Watch('month')
+  saveMonth(month: string): void {
+    window.sessionStorage.setItem('month', month);
   }
 }
 </script>

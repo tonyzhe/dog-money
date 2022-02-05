@@ -33,6 +33,11 @@ const routes: Array<RouteConfig> = [
     path: '/chart',
     name: 'Chart',
     component: () => import('../views/Chart.vue')
+  },
+  {
+    path: '/record/edit/:id',
+    name: 'RecordEdit',
+    component: () => import('../views/RecordEdit.vue')
   }
 
 ];
