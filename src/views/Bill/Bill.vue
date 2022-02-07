@@ -56,6 +56,7 @@
               <icon :name="record.tag.name" class-prefix="bill"></icon>
               <span>{{ record.tag.value }}</span>
             </div>
+            <span class="note">{{ record.note }}</span>
             <span>{{ getAmount(record) }}</span>
           </router-link>
         </div>
@@ -364,10 +365,20 @@ export default class Bill extends Vue {
         justify-content: space-between;
         box-shadow: inset 0 -0.5px 0.5px -0.5px rgb(0 0 0 / 20%);
 
+        .note {
+          flex-grow: 1;
+          color: #dddddd;
+          font-size: 14px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+
         .icon {
           display: flex;
           align-items: center;
           margin-right: 16px;
+
 
           ::v-deep {
             .bill-icons {

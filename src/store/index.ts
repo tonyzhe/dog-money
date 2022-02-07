@@ -65,6 +65,11 @@ const store = new Vuex.Store({
       }
       store.commit('saveRecord');
     },
+    removeRecord(state, id: number) {
+      state.recordList = state.recordList.filter(item => !(item.id === id));
+      store.commit('saveRecord');
+
+    }
   },
   actions: {},
   modules: {}

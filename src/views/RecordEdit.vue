@@ -1,12 +1,12 @@
 <template>
   <div class="edit">
     <header class="header">
-      <button class="back">
+      <button class="back" @click="back">
         <icon name="back" class-prefix="back"/>
       </button>
       <div class="tag">
-        <icon name="food"/>
-        <span>餐饮</span>
+        <icon :name="record.tag.name"/>
+        <span>{{ record.tag.value }}</span>
       </div>
       <div class="last"></div>
     </header>
@@ -70,11 +70,21 @@ export default class RecordEdit extends Vue {
   ok(): void {
     this.record.amount = parseInt(this.record.amount.toString());
     this.$store.commit('updateRecord', {id: this.record.id, record: this.record});
-    this.$router.replace('/');
+    this.back();
   }
 
   remove(): void {
-    console.log('ok');
+    let result = confirm('do you really want delete this tag');
+    if (result) {
+      this.$store.commit('removeRecord', this.record.id);
+      this.back();
+    } else {
+      return;
+    }
+  }
+
+  back(): void {
+    this.$router.back();
   }
 
   // ok()
