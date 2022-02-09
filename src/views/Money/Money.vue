@@ -22,6 +22,10 @@
     <Calculator :amount.sync="record.amount" :note.sync="record.note" class-prefix="money"
                 @submit="saveRecord"
     />
+    <div v-if="isQrcode&&shutdown" class="qrcode">
+      <button @click="shutdown=!shutdown">关闭</button>
+      <img :src="qrcode" alt="">
+    </div>
 
   </layout>
 </template>
@@ -36,12 +40,26 @@ import {RecordItem, TagItem} from '@/custom';
 import {defaultIncomeTags} from '@/constants/defaultTags';
 import Calculator from '@/components/Money/Calculator.vue';
 
+const qrcode = require('@/assets/qrcode.png');
 @Component({
   components: {Calculator, TagList, Tabs, Layout}
 })
 export default class Money extends Vue {
   record: RecordItem = this.initRecord();
   incomeTags = defaultIncomeTags;
+  qrcode = qrcode;
+  shutdown = true;
+  clientWidth = document.documentElement.clientWidth;
+
+  mounted(): void {
+    if (this.clientWidth > 500) {
+      window.alert('已检测到您可能使用电脑浏览,推荐扫码手机浏览效果更佳哦~');
+    }
+  }
+
+  get isQrcode(): boolean {
+    return document.documentElement.clientWidth > 500;
+  }
 
   get tagList(): TagItem[] {
     return this.$store.state.tagList;
@@ -98,6 +116,25 @@ export default class Money extends Vue {
     flex-grow: 1;
     overflow: auto;
     border-top: 1px solid #dddddd;
+  }
+
+  .qrcode {
+    position: fixed;
+    background: #fff;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 35%;
+
+    > button {
+      position: absolute;
+      right: 6px;
+
+
+    }
+
+    > img {
+      margin-top: 12px;
+    }
   }
 }
 </style>
