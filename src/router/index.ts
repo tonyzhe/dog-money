@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter, {RouteConfig} from 'vue-router';
 import Money from '@/views/Money/Money.vue';
 import Tags from '@/views/Money/AddTags/Tags.vue';
+import Bill from '@/views/Bill/Bill.vue';
 
 Vue.use(VueRouter);
 
@@ -21,7 +22,7 @@ const routes: Array<RouteConfig> = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Bill/Bill.vue')
+    component: Bill
   },
   {
     path: '/tags',

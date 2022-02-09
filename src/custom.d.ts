@@ -21,5 +21,5 @@ export interface RecordItem {
 
 export interface TabBar {
   name: string;
-  value: '-' | '+';
+  value: string;
 }

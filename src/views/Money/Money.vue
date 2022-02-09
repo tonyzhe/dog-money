@@ -1,7 +1,9 @@
 <template>
   <layout class-prefix="money">
     <tabs :tabs="[{name:'支出',value:'-'},{name:'收入',value:'+'}]"
-          :current-tab.sync="record.type"/>
+          :current-tab.sync="record.type"
+          class-prefix="money"
+    />
     <div class="tag-list">
       <tag-list v-if="record.type==='-'"
                 :tag-list="tagList"
@@ -87,10 +89,15 @@ export default class Money extends Vue {
     flex-grow: 1;
   }
 
+  .money-tabs {
+    margin-bottom: 10px;
+  }
+
 
   .tag-list {
     flex-grow: 1;
     overflow: auto;
+    border-top: 1px solid #dddddd;
   }
 }
 </style>

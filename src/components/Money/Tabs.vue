@@ -1,10 +1,10 @@
 <template>
   <div class="header-wrapper">
-    <div></div>
-    <div class="switches">
+    <div class="switches" :class="{[classPrefix+'-tabs']:classPrefix}">
       <ul>
         <li v-for="(item,index) in tabs" :key="index"
-            :class="{'selected': currentTab===item.value}"
+            :class="{'selected': currentTab===item.value,
+            [classPrefix+'-tabs-item']:classPrefix}"
             @click="selectedTab(item.value)"
         >{{
             item.name
@@ -12,9 +12,7 @@
         </li>
       </ul>
     </div>
-    <div class="cancel" @click="cancel">
-      <Icon name="cancel" class-prefix="tab"></Icon>
-    </div>
+
   </div>
 </template>
 
@@ -28,10 +26,11 @@ import {TabBar} from '@/custom';
   components: {Icon}
 })
 export default class Tabs extends Vue {
-  @Prop({required: true, type: String}) currentTab!: '-' | '+';
+  @Prop({required: true, type: String}) currentTab!: string;
   @Prop({required: true, type: Array}) tabs!: TabBar[];
+  @Prop(String) classPrefix?: string;
 
-  selectedTab(tabValue: '-' | '+'): void {
+  selectedTab(tabValue: string): void {
     this.$emit('update:currentTab', tabValue);
   }
 
@@ -45,9 +44,8 @@ export default class Tabs extends Vue {
 <style lang="scss" scoped>
 .header-wrapper {
   display: flex;
-  justify-content: space-between;
-  padding: 10px 0;
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+  justify-content: center;
+  margin-top: 10px;
 
   .switches {
     > ul {

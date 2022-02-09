@@ -344,6 +344,10 @@ export default class Bill extends Vue {
 }
 
 .groupListWrapper {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+
   .groupList {
     .title {
       display: flex;
